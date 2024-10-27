@@ -1,0 +1,285 @@
+// Create Imperial Courts
+CREATE (heianCourt:ImperialCourt {name: "Heian Imperial Court"})
+CREATE (kamakuraCourt:ImperialCourt {name: "Kamakura Imperial Court"})
+
+// Create Major Buddhist Temples
+CREATE (enryakuji:BuddhistTemple {name: "Enryaku-ji"})
+CREATE (kofukuji:BuddhistTemple {name: "Kofuku-ji"})
+CREATE (todaiji:BuddhistTemple {name: "Todai-ji"})
+CREATE (kiyomizu:BuddhistTemple {name: "Kiyomizu-dera"})
+
+// Create Major Clans
+CREATE (taira:Clan {name: "Taira Clan"})
+CREATE (minamoto:Clan {name: "Minamoto Clan"})
+CREATE (fujiwara:Clan {name: "Fujiwara Clan"})
+
+// Create Key People - Taira Family
+CREATE (kiyomori:Person {
+    name: "Taira no Kiyomori",
+    family_name: "Taira",
+    given_name: "Kiyomori",
+    born: "1118",
+    dead: "1181"
+})
+
+CREATE (shigemori:Person {
+    name: "Taira no Shigemori",
+    family_name: "Taira",
+    given_name: "Shigemori",
+    born: "1138",
+    dead: "1179"
+})
+
+CREATE (munemori:Person {
+    name: "Taira no Munemori",
+    family_name: "Taira",
+    given_name: "Munemori",
+    dead: "1185"
+})
+
+CREATE (tadamori:Person {
+    name: "Taira no Tadamori",
+    family_name: "Taira",
+    given_name: "Tadamori",
+    dead: "1153"
+})
+
+CREATE (tokitada:Person {
+    name: "Taira no Tokitada",
+    family_name: "Taira",
+    given_name: "Tokitada"
+})
+
+// Create Key People - Minamoto Family
+CREATE (yorimasa:Person {
+    name: "Minamoto no Yorimasa",
+    family_name: "Minamoto",
+    given_name: "Yorimasa",
+    born: "1104",
+    dead: "1180"
+})
+
+// Create Key People - Religious Figures
+CREATE (shunkan:Person {
+    name: "Shunkan Sozu",
+    given_name: "Shunkan"
+})
+
+// Create Key People - Others
+CREATE (motofusa:Person {
+    name: "Fujiwara no Motofusa",
+    family_name: "Fujiwara",
+    given_name: "Motofusa"
+})
+
+CREATE (narichika:Person {
+    name: "Fujiwara no Narichika",
+    family_name: "Fujiwara",
+    given_name: "Narichika",
+    dead: "1177"
+})
+
+// Create Key People - Entertainers
+CREATE (gio:Person {name: "Gio"})
+CREATE (ginyo:Person {name: "Ginyo"})
+CREATE (hotoke:Person {name: "Hotoke"})
+
+// Create Major Events
+CREATE (gionIncident:Event {
+    name: "Gion Incident",
+    year_of_occurrence: 1177,
+    place_of_occurrence: "Gion"
+})
+
+CREATE (heijiFight:Event {
+    name: "Heiji Rebellion",
+    year_of_occurrence: 1159,
+    place_of_occurrence: "Kyoto"
+})
+
+CREATE (shishiTaniPlot:Event {
+    name: "Shishi-no-Tani Conspiracy",
+    year_of_occurrence: 1177,
+    place_of_occurrence: "Shishi-no-Tani"
+})
+
+// Create Chapters
+CREATE (c1:Chapter {title: "Gion Shoja"})
+CREATE (c2:Chapter {title: "The Assassination at Court"})
+CREATE (c3:Chapter {title: "Twice an Empress"})
+CREATE (c4:Chapter {title: "Gio"})
+CREATE (c5:Chapter {title: "The Splendour of Kiyomori"})
+CREATE (c6:Chapter {title: "Kamuro"})
+CREATE (c7:Chapter {title: "The Quarrel about the Tablets"})
+CREATE (c8:Chapter {title: "Shishi no Tani"})
+CREATE (c9:Chapter {title: "The Fight at the Ugawa"})
+CREATE (c10:Chapter {title: "The Vow"})
+CREATE (c11:Chapter {title: "Carrying Down the Sacred Cars"})
+CREATE (c12:Chapter {title: "The Burning of the Palace"})
+
+// Create Relationships - Clan Memberships
+CREATE (taira)-[:HAS_MEMBER]->(kiyomori)
+CREATE (taira)-[:HAS_MEMBER]->(shigemori)
+CREATE (taira)-[:HAS_MEMBER]->(munemori)
+CREATE (taira)-[:HAS_MEMBER]->(tadamori)
+CREATE (taira)-[:HAS_MEMBER]->(tokitada)
+CREATE (minamoto)-[:HAS_MEMBER]->(yorimasa)
+CREATE (fujiwara)-[:HAS_MEMBER]->(motofusa)
+CREATE (fujiwara)-[:HAS_MEMBER]->(narichika)
+
+// Create Family Relationships
+CREATE (tadamori)-[:HAS_CHILD]->(kiyomori)
+CREATE (kiyomori)-[:HAS_CHILD]->(shigemori)
+CREATE (kiyomori)-[:HAS_CHILD]->(munemori)
+CREATE (shigemori)-[:HAS_SIBLING]->(munemori)
+CREATE (gio)-[:HAS_SIBLING]->(ginyo)
+
+// Create Temple Memberships
+CREATE (enryakuji)-[:HAS_MEMBER]->(shunkan)
+
+// Create Chapter Mentions
+CREATE (c1)-[:MENTIONS_PERSON]->(kiyomori)
+CREATE (c2)-[:MENTIONS_PERSON]->(tadamori)
+CREATE (c4)-[:MENTIONS_PERSON]->(gio)
+CREATE (c4)-[:MENTIONS_PERSON]->(hotoke)
+CREATE (c4)-[:MENTIONS_PERSON]->(ginyo)
+CREATE (c5)-[:MENTIONS_PERSON]->(kiyomori)
+CREATE (c8)-[:MENTIONS_PERSON]->(narichika)
+CREATE (c9)-[:MENTIONS_PERSON]->(yorimasa)
+
+// Create Event Participants
+CREATE (gionIncident)-[:HAS_PARTICIPANT]->(kiyomori)
+CREATE (heijiFight)-[:HAS_PARTICIPANT]->(kiyomori)
+CREATE (shishiTaniPlot)-[:HAS_PARTICIPANT]->(narichika)
+CREATE (shishiTaniPlot)-[:HAS_PARTICIPANT]->(shunkan)
+
+// Create Event Relationships
+CREATE (shishiTaniPlot)-[:IS_PART_OF]->(heijiFight)
+
+// Additional Taira Family Members
+CREATE (tomomori:Person {
+    name: "Taira no Tomomori",
+    family_name: "Taira",
+    given_name: "Tomomori"
+})
+
+CREATE (shigehira:Person {
+    name: "Taira no Shigehira",
+    family_name: "Taira",
+    given_name: "Shigehira"
+})
+
+CREATE (yorimori:Person {
+    name: "Taira no Yorimori",
+    family_name: "Taira",
+    given_name: "Yorimori"
+})
+
+CREATE (tsunemori:Person {
+    name: "Taira no Tsunemori",
+    family_name: "Taira",
+    given_name: "Tsunemori"
+})
+
+CREATE (tadanori:Person {
+    name: "Taira no Tadanori",
+    family_name: "Taira",
+    given_name: "Tadanori"
+})
+
+CREATE (sukemori:Person {
+    name: "Taira no Sukemori",
+    family_name: "Taira",
+    given_name: "Sukemori",
+    born: "1161"
+})
+
+// Create Clan Memberships
+CREATE (taira)-[:HAS_MEMBER]->(tadamori)
+CREATE (taira)-[:HAS_MEMBER]->(tokitada)
+CREATE (taira)-[:HAS_MEMBER]->(tomomori)
+CREATE (taira)-[:HAS_MEMBER]->(shigehira)
+CREATE (taira)-[:HAS_MEMBER]->(yorimori)
+CREATE (taira)-[:HAS_MEMBER]->(tsunemori)
+CREATE (taira)-[:HAS_MEMBER]->(koremori)
+CREATE (taira)-[:HAS_MEMBER]->(tadanori)
+CREATE (taira)-[:HAS_MEMBER]->(sukemori)
+
+// Create Family Relationships
+CREATE (tadamori)-[:HAS_CHILD]->(kiyomori)
+CREATE (kiyomori)-[:HAS_CHILD]->(shigemori)
+CREATE (kiyomori)-[:HAS_CHILD]->(munemori)
+CREATE (kiyomori)-[:HAS_CHILD]->(tomomori)
+CREATE (kiyomori)-[:HAS_CHILD]->(shigehira)
+CREATE (shigemori)-[:HAS_CHILD]->(koremori)
+CREATE (shigemori)-[:HAS_CHILD]->(sukemori)
+
+// Create Sibling Relationships
+CREATE (shigemori)-[:HAS_SIBLING]->(munemori)
+CREATE (shigemori)-[:HAS_SIBLING]->(tomomori)
+CREATE (shigemori)-[:HAS_SIBLING]->(shigehira)
+CREATE (yorimori)-[:HAS_SIBLING]->(tsunemori)
+
+// Create Chapter Mentions
+CREATE (c1)-[:MENTIONS_PERSON]->(tadamori)
+CREATE (c2)-[:MENTIONS_PERSON]->(tadamori)
+CREATE (c5)-[:MENTIONS_PERSON]->(tokitada)
+CREATE (c10)-[:MENTIONS_PERSON]->(tomomori)
+CREATE (c10)-[:MENTIONS_PERSON]->(shigehira)
+CREATE (c10)-[:MENTIONS_PERSON]->(yorimori)
+CREATE (c10)-[:MENTIONS_PERSON]->(tsunemori)
+CREATE (c10)-[:MENTIONS_PERSON]->(koremori)
+
+// Additional Taira Family Members with dates
+CREATE (tadamasa:Person {
+    name: "Taira no Tadamasa",
+    family_name: "Taira",
+    given_name: "Tadamasa"
+})
+
+CREATE (masamori:Person {
+    name: "Taira no Masamori",
+    family_name: "Taira",
+    given_name: "Masamori"
+})
+
+// Create Additional Chapters
+CREATE (c13:Chapter {title: "The Conflagration at Kiyomizu"})
+CREATE (c14:Chapter {title: "Carrying Down the Sacred Cars"})
+CREATE (c15:Chapter {title: "The Burning of the Palace"})
+
+// Create Additional Events
+CREATE (palaceBurning:Event {
+    name: "Burning of the Palace",
+    year_of_occurrence: 1177,
+    place_of_occurrence: "Kyoto"
+})
+
+// Create Family Relationships
+CREATE (masamori)-[:HAS_CHILD]->(tadamori)
+CREATE (tadamori)-[:HAS_CHILD]->(kiyomori)
+CREATE (kiyomori)-[:HAS_CHILD]->(shigemori)
+CREATE (kiyomori)-[:HAS_CHILD]->(munemori)
+CREATE (kiyomori)-[:HAS_CHILD]->(tomomori)
+CREATE (shigemori)-[:HAS_CHILD]->(koremori)
+
+// Create Clan Memberships (note direction: Clan->Person)
+CREATE (taira)-[:HAS_MEMBER]->(tadamasa)
+CREATE (taira)-[:HAS_MEMBER]->(koremori)
+CREATE (taira)-[:HAS_MEMBER]->(tokitada)
+CREATE (taira)-[:HAS_MEMBER]->(tadanori)
+CREATE (taira)-[:HAS_MEMBER]->(masamori)
+
+// Create Court Memberships
+CREATE (heianCourt)-[:HAS_MEMBER]->(kiyomori)
+CREATE (heianCourt)-[:HAS_MEMBER]->(tokitada)
+
+// Create Chapter Mentions
+CREATE (c13)-[:MENTIONS_PERSON]->(kiyomori)
+CREATE (c14)-[:MENTIONS_PERSON]->(shigemori)
+CREATE (c15)-[:MENTIONS_PERSON]->(tokitada)
+
+// Create Event Participants
+CREATE (gionIncident)-[:HAS_PARTICIPANT]->(kiyomori)
+CREATE (palaceBurning)-[:HAS_PARTICIPANT]->(tokitada)
+CREATE (palaceBurning)-[:IS_PART_OF]->(gionIncident);
